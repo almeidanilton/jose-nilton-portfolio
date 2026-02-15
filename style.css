@@ -172,12 +172,13 @@ body{
   box-shadow: 0 12px 30px rgba(0,0,0,0.18);
   scroll-margin-top: calc(var(--nav-h) + 18px);
 
-  /* Animação */
-  opacity: 0;
-  transform: translateY(30px);
+  /* ✅ Segurança: mostra conteúdo mesmo sem JS */
+  opacity: 1;
+  transform: none;
   transition: opacity .6s ease, transform .6s ease;
 }
 
+/* ✅ Quando o JS adicionar .visible, mantém suave */
 .card.visible{
   opacity: 1;
   transform: translateY(0);
@@ -291,10 +292,21 @@ body{
            PROJETOS
 ========================= */
 
+/* ✅ Agora o grid funciona */
+.projetos-grid{
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+}
+
 .projeto{
-  margin-top:18px;
-  padding-top:18px;
-  border-top:1px solid rgba(0,0,0,0.08);
+  padding-top: 18px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+.projeto:first-child{
+  border-top: none;
+  padding-top: 0;
 }
 
 .projeto img{
@@ -303,14 +315,21 @@ body{
   border-radius:10px;
 }
 
+.projeto-links{
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 /* =========================
-        HABILIDADES 
+        HABILIDADES
 ========================= */
 
 .habilidades-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
   margin-top: 18px;
 }
 
@@ -356,6 +375,20 @@ body{
 }
 
 /* =========================
+          CONTATO
+========================= */
+
+.contato-links a{
+  color: var(--card-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contato-links a:hover{
+  text-decoration: underline;
+}
+
+/* =========================
           DARK MODE
 ========================= */
 
@@ -376,6 +409,10 @@ body{
 
 .dark .btn-secondary{
   color:#fff;
+}
+
+.dark .contato-links a{
+  color: #fff;
 }
 
 /* Ajuste geral para evitar barra lateral horizontal */
@@ -417,17 +454,4 @@ html, body{
   transform: translateY(-3px);
   background: #020024;
   color: white;
-}
-
-/* =========================
-          SCROLLBAR
-========================= */
-
-::-webkit-scrollbar{
-  width: 8px;
-}
-
-::-webkit-scrollbar-thumb{
-  background: #0077ff;
-  border-radius: 10px;
 }
